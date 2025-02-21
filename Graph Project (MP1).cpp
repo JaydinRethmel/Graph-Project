@@ -7,6 +7,8 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <unordered_map>
+#include <string>
 using namespace std;
 
 /**
@@ -17,22 +19,26 @@ using namespace std;
  * Instance Variables:
  * - numVertices: Number of vertices in the graph
  * - adjLists: A vector of lists that will store the adjacency list for each vertex
+ * - verticeNames: A hash map that will store the name of each vertex
  * 
  * Methods:
- * Graph(int vertices): Constructor that initializes the number of vertices and resizes the adjLists vector
- * addEdge(int src, int dest): Function to add an edge to the graph
- * printGraph(): Function to print the graph
+ * - Graph(int vertices): Constructor that initializes the number of vertices and resizes the adjLists vector
+ * - addEdge(int src, int dest): Function to add an edge to the graph
+ * - setNodeName(int node, string name): Function to set the name of a node
+ * - printGraph(): Function to print the graph
  * 
  */
 
  class Graph {
     private:
         int numVertices; 
-        vector<list<int>> adjLists; 
+        vector<list<pair<int, int>>> adjLists; 
+        unordered_map<int, string> verticeNames;
 
     public:
         Graph(int vertices);  
-        void addEdge(int src, int dest); 
+        void addEdge(int src, int dest, int weight); 
+        void setNodeName(int node, const string& name);
         void printGraph();
 };
 
@@ -41,16 +47,20 @@ Graph::Graph(int vertices) {
     adjLists.resize(vertices);
 }
 
-void Graph::addEdge(int src, int dest) {
-    adjLists[src].push_back(dest);
-    adjLists[dest].push_back(src);
+void Graph::addEdge(int src, int dest, int weight) {
+    adjLists[src].push_back(make_pair(dest, weight));
+    adjLists[dest].push_back(make_pair(src, weight));
+}
+
+void Graph::setNodeName(int node, const string& name) {
+    verticeNames[node] = name;
 }
 
 void Graph::printGraph() {
     for (int i = 0; i < numVertices; i++) {
-        cout << "Vertex " << i << " has the following neighbors: ";
-        for (int neighbor : adjLists[i]) {
-            cout << neighbor << " ";
+        cout << "Vertex " << verticeNames[i] << " has the following neighbors: ";
+        for (const auto& neighbor : adjLists[i]) {
+            cout << '(' << neighbor.first << " (" << verticeNames[neighbor.first] << "), weight: " << neighbor.second << ") ";
         }
         cout << endl;
     }
