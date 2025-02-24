@@ -58,9 +58,9 @@ void Graph::setNodeName(int node, const string& name) {
 
 void Graph::printGraph() {
     for (int i = 0; i < numVertices; i++) {
-        cout << "Vertex " << verticeNames[i] << " has the following neighbors: ";
+        cout << "Vertex " << verticeNames[i] << " has the following neighbors: \n";
         for (const auto& neighbor : adjLists[i]) {
-            cout << '(' << neighbor.first << " (" << verticeNames[neighbor.first] << "), weight: " << neighbor.second << ") ";
+            cout << verticeNames[neighbor.first] << " , weight: " << neighbor.second << ") \n";
         }
         cout << endl;
     }
@@ -68,4 +68,45 @@ void Graph::printGraph() {
 
 
 int main() {
+    // create a graph with 7 vertices
+    Graph mainGraph(7);
+
+    // Set the names of the vertices
+    mainGraph.setNodeName(0, "Dallas");
+    mainGraph.setNodeName(1, "Austin");
+    mainGraph.setNodeName(2, "Washington");
+    mainGraph.setNodeName(3, "Denver");
+    mainGraph.setNodeName(4, "Chicago");
+    mainGraph.setNodeName(5, "Atlanta");
+    mainGraph.setNodeName(6, "Houston");
+
+    // Edges for "Dallas"
+    mainGraph.addEdge(0, 1, 200);
+    mainGraph.addEdge(0, 3, 780);
+    mainGraph.addEdge(0, 4, 900);
+
+    // Edges for "Austin"
+    mainGraph.addEdge(1, 6, 160);
+    mainGraph.addEdge(1, 0, 200);
+    
+    // Edges for "Washington"
+    mainGraph.addEdge(2, 0, 1300);
+    mainGraph.addEdge(2, 5, 600);
+    
+    // Edges for "Denver"
+    mainGraph.addEdge(3, 4, 1000);
+    mainGraph.addEdge(3, 5, 1400);
+    
+    // Edges for "Chicago"
+    mainGraph.addEdge(4, 3, 1000);
+    
+    // Edges for "Atlanta"
+    mainGraph.addEdge(5, 3, 600);
+    mainGraph.addEdge(5, 6, 800);
+    
+    // Edges for "Houston"
+    mainGraph.addEdge(6, 5, 800);
+
+    // Print the graph
+    mainGraph.printGraph();
 }

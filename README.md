@@ -10,7 +10,7 @@ The creation of the "Graph" class gives us 2 instantaneous variables and 3 funct
  - numVertices: Number of vertices in the graph
  - adjLists: A vector of lists that will store the adjacency list for each vertex
  
- Methods:
+ Functions:
  - Graph(int vertices): Constructor that initializes the number of vertices and resizes the adjLists vector
  - addEdge(int src, int dest): Function to add an edge to the graph
  - printGraph(): Function to print the graph
@@ -25,3 +25,14 @@ Instance Variable:
 
 Methods:
 - setNodeName(int node, string name): Function to set the name of a node
+
+# Commit 3:
+
+## Creating the Graph in Main
+
+The last part of this project is to implement the graph into our main.
+
+To do so we begin by creating an object called "mainGraph", which serves as the data structure that will hold our weights, names, and edges / connections.
+
+The next step was to add the edges using the class function we created, called "addEdge," our final step is to print to the console all the connective edges to the vertice locations
+
